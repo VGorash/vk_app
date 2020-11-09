@@ -26,6 +26,10 @@ public class WordsListComponent {
     }
 
     private List<String> readWordsFromFile(String path) throws IOException {
+        File dir = new File("./");
+        for(File i : dir.listFiles()){
+            System.out.println(i.getName());
+        }
         String real_path = System.getProperty("user.home") + File.separator + path;
         return Files.readAllLines(Paths.get(real_path));
     }
