@@ -2,7 +2,6 @@ package akvv.app.components;
 import org.springframework.stereotype.Component;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,7 +10,7 @@ import java.util.List;
 @Component
 public class WordsListComponent {
 
-    private static final String PATH_TO_FILE = "words.txt";
+    private static final String PATH_TO_FILE = "./target/words.txt";
 
 
     private List <String> words;
@@ -26,12 +25,7 @@ public class WordsListComponent {
     }
 
     private List<String> readWordsFromFile(String path) throws IOException {
-        File dir = new File("./");
-        for(File i : dir.listFiles()){
-            System.out.println(i.getName());
-        }
-        String real_path = System.getProperty("user.home") + File.separator + path;
-        return Files.readAllLines(Paths.get(real_path));
+        return Files.readAllLines(Paths.get(path));
     }
 
     public List<String> updateWords() {
