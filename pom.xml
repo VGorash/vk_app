@@ -64,6 +64,7 @@
                                     <filtering>false</filtering>
                                     <includes>
                                         <include>words.txt</include>
+                                        <include>military_words.txt</include>
                                     </includes>
                                 </resource>
                             </resources>

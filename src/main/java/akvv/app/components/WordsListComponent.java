@@ -1,43 +1,47 @@
 package akvv.app.components;
-import org.springframework.stereotype.Component;
 
+
+import akvv.app.enums.Category;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class WordsListComponent {
 
-    private static final String PATH_TO_FILE = "./target/words.txt";
+    private final Map<Category, List<String>> wordLists;
 
 
-    private List <String> words;
-
-    private void setWordsList() {
-        try {
-            words = readWordsFromFile(PATH_TO_FILE);
+    private List<String> getWordsList(Category category) {
+        if(!wordLists.containsKey(category)){
+            try {
+                wordLists.put(category, readWordsFromFile(category.getPath()));
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
-        catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        return wordLists.get(category);
     }
 
     private List<String> readWordsFromFile(String path) throws IOException {
         return Files.readAllLines(Paths.get(path));
     }
 
-    public List<String> updateWords() {
-        setWordsList();
-        return words;
-    }
-
-    public List<String> getWords() {
-        return words;
+    public Set<String> getWordsSet(int numWords, Category category){
+        List<String> words = getWordsList(category);
+        Set<String> result = new HashSet<>();
+        Random random = new Random();
+        while (result.size()<numWords){
+            result.add(words.get(random.nextInt(words.size())));
+        }
+        return result;
     }
 
     public WordsListComponent() {
-        setWordsList();
+        wordLists = new HashMap<>();
     }
 }
