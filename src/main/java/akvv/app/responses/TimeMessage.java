@@ -1,4 +1,4 @@
-package akvv.app;
+package akvv.app.responses;
 
 public class TimeMessage {
 

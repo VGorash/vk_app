@@ -1,4 +1,4 @@
-package akvv.app;
+package akvv.app.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
